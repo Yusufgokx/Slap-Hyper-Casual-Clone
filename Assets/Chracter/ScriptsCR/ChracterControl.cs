@@ -8,7 +8,7 @@ public class ChracterControl : MonoBehaviour
     [SerializeField]float hiz;
     float hor;
     Rigidbody rb;
-
+    public Animator animKing;
 
   
     void Start()
@@ -25,7 +25,31 @@ public class ChracterControl : MonoBehaviour
 
     }
 
+    public void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("enemy"))
+        {
+
+            animKing.SetBool("kingGirdi", true);
+
+
+        }
 
 
 
+    }
+
+    public void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("enemy"))
+        {
+
+            animKing.SetBool("kingGirdi", false);
+
+
+        }
+
+
+
+    }
 }

@@ -8,7 +8,7 @@ public class enemyControl : MonoBehaviour
     public GameObject Hedef;
   
     public Animator anim;
-    bool AttackOldu;
+    
     void Start()
     {
         Hedef = GameObject.Find("Player");
@@ -38,10 +38,20 @@ public class enemyControl : MonoBehaviour
             
 
         }
-        else
+      
+
+
+    }
+    public void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
+
             anim.SetBool("attack", false);
+
+
         }
+
 
 
     }
