@@ -8,9 +8,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Scripts")]
     public ChracterControl chracterControl;
+    
+    
     void Awake()
     {
         Instance = this;
+
     }
 
     void Start()
@@ -23,4 +26,6 @@ public class GameManager : MonoBehaviour
     {
         
     }
+  
+
 }

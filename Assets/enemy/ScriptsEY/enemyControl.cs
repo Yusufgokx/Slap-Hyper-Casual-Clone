@@ -1,33 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class enemyControl : MonoBehaviour
+public class EnemyControl : MonoBehaviour
 {
-    public bool playerDegdi = false;
-    public GameObject Hedef;
-  
+    public bool playerCollision = false;
+    public Transform player;
+    private NavMeshAgent agent;
     public Animator anim;
-    
+
     void Start()
     {
-        Hedef = GameObject.Find("Player");
+        player = GameManager.Instance.chracterControl.transform;
+        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        
-    }
-
-
-    void Update()
-    {      
-       
-        
-           
-
-
 
     }
 
-
+    public void Update()
+    {
+        if (playerCollision == true)
+        {
+            agent.SetDestination(player.position);
+        }
+    }
 
     public void OnCollisionEnter(Collision collision)
     {
@@ -35,10 +32,10 @@ public class enemyControl : MonoBehaviour
         {
 
             anim.SetBool("attack", true);
-            
 
+            playerCollision = true;
         }
-      
+
 
 
     }
