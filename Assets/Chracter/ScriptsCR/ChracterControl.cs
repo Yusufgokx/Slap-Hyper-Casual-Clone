@@ -37,7 +37,7 @@ public class ChracterControl : MonoBehaviour
                 movePos.y = -0.3f;
                 rb.velocity = movePos * hareketHizi;
                 animKing.SetBool("Run", true);
-                var lookPos = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+                var lookPos = new Vector3(joystick.Horizontal, 0, 1);
                 var rotation = Quaternion.LookRotation(lookPos);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 15);
             }

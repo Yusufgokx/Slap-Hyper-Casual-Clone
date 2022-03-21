@@ -12,6 +12,7 @@ public class EnemyControl : MonoBehaviour
 
     void Start()
     {
+        playerCollision = false;
         player = GameManager.Instance.chracterControl.transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
@@ -20,22 +21,35 @@ public class EnemyControl : MonoBehaviour
 
     public void Update()
     {
-        if (playerCollision == true)
+        if (playerCollision == true && Vector3.Distance(this.gameObject.transform.position, player.position) > 2)
         {
             agent.SetDestination(player.position);
+            anim.SetBool("enemyRun", true);
         }
+        else{
+            anim.SetBool("enemyRun", false);
+        }
+        //  Debug.Log(Vector3.Distance(this.gameObject.transform.position, player.position));
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player")&&playerCollision==false)
         {
 
             anim.SetBool("attack", true);
 
             playerCollision = true;
-        }
 
+        }
+        if (collision.gameObject.CompareTag("Player"))
+        {
+
+            anim.SetBool("enemyRun", true);
+
+            playerCollision = true;
+
+        }
 
 
     }
@@ -48,7 +62,14 @@ public class EnemyControl : MonoBehaviour
 
 
         }
+        if (collision.gameObject.CompareTag("Player"))
+        {
 
+            anim.SetBool("enemyRun", true);
+
+            playerCollision = true;
+
+        }
 
 
     }

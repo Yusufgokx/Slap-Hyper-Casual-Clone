@@ -12,12 +12,14 @@ public class ObstacleScript : MonoBehaviour
     private float startPosX;
     public float durationDelay;
     public float rotateDuration;
+
+
     
   
     void Start()
     {
 
-        transform.DORotate(Vector3.forward*360, rotateDuration,RotateMode.FastBeyond360).SetLoops(-1);
+       transform.DORotate(Vector3.forward*360, rotateDuration,RotateMode.FastBeyond360).SetLoops(-10);
 
         startPosX = transform.position.x;
         ObstacleMove();
@@ -27,11 +29,12 @@ public class ObstacleScript : MonoBehaviour
  
     void Update()
     {
-
+       
       // transform.Rotate(Vector3.forward*(sawRotationSpeed*Time.deltaTime));
     }
     public void ObstacleMove()
     {
+       
         //transform.DOMove(Hedef.position, zaman).OnComplete(() => geriGel());
         //transform.DOMove(new Vector3 (transform.position.x+5,transform.position.y,transform.position.z), zaman).OnComplete(() => transform.DOMove( new Vector3(transform.position.x-5,transform.position.y,transform.position.z) , 1).OnComplete(() => ObstacleMove())); //5birim sağa 5 birim sola haraket ettirir 1saniyede 
         transform.DOMoveX(andPosX, zaman / 2).SetDelay(durationDelay/2).OnComplete(() =>
