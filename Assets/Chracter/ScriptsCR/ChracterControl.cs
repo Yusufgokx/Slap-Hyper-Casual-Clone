@@ -5,52 +5,37 @@ using TMPro;
 
 public class ChracterControl : MonoBehaviour
 {
-    [SerializeField] float hareketHizi;
-    [SerializeField] float hiz;
-    float hor;
+    //[SerializeField] float hareketHizi;
+   // [SerializeField] float hiz;
+    
     Rigidbody rb;
     public Animator animKing;
     public float Healt;
-    public Joystick joystick;
     public TextMeshProUGUI hasarText;
-
+    public int guc;
+    public float hiz;
+    public Camera mainCamera;
 
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
         Healt = 100;
-        hasarText.text ="HASAR"+ Healt.ToString();
+        hasarText.text =Healt.ToString();// "HASAR"+  = işaretninden sonra soldaki hasar kodunu yazarsak sayı 'HARARDEĞER'ŞEKLİNDE YAZAR ;
+ 
+
     }
 
     public void Update()
     {
-        MovePlayer();   
+        animKing.SetBool("Run", true);
+        float yatay = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector3(yatay*hiz, 0, 10);
+       
+
+
     }
 
-    public void MovePlayer()
-    {
-        if (joystick.Horizontal != 0f || joystick.Vertical != 0f)
-        {
-            if (rb.velocity.y >= -2.5f && rb.velocity.y <= 2f)
-            {
-                var movePos = transform.forward;
-                movePos.y = -0.3f;
-                rb.velocity = movePos * hareketHizi;
-                animKing.SetBool("Run", true);
-                var lookPos = new Vector3(joystick.Horizontal, 0, 1);
-                var rotation = Quaternion.LookRotation(lookPos);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 15);
-            }
-
-        }
-        else
-        {
-            animKing.SetBool("Run", false);
-            var zeroPos = Vector3.zero;
-            zeroPos.y = -0.3f;
-
-        }
-    }
+  
 
     public void OnCollisionEnter(Collision other)
     {
@@ -88,7 +73,7 @@ public class ChracterControl : MonoBehaviour
     public void HasarAl()
     {
         Healt -= Random.Range(5, 15);
-        hasarText.text = "HASAR" + Healt.ToString();
+        hasarText.text =Healt.ToString();
     }
 
 }

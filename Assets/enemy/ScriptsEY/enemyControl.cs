@@ -9,13 +9,17 @@ public class EnemyControl : MonoBehaviour
     public Transform player;
     private NavMeshAgent agent;
     public Animator anim;
-
+    public Rigidbody enemyrb;
+    public float destrucStrengthMultiplier = 3f;
+    
     void Start()
     {
+        enemyrb = GetComponent<Rigidbody>();
         playerCollision = false;
         player = GameManager.Instance.chracterControl.transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        //mainCamera = GetComponent<Transform>();
 
     }
 
@@ -26,15 +30,17 @@ public class EnemyControl : MonoBehaviour
             agent.SetDestination(player.position);
             anim.SetBool("enemyRun", true);
         }
-        else{
+        else
+        {
             anim.SetBool("enemyRun", false);
         }
+       
         //  Debug.Log(Vector3.Distance(this.gameObject.transform.position, player.position));
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player")&&playerCollision==false)
+        if (collision.gameObject.CompareTag("Player") && playerCollision == false)
         {
 
             anim.SetBool("attack", true);
@@ -72,5 +78,12 @@ public class EnemyControl : MonoBehaviour
         }
 
 
+    }
+    public void DestrucFirst()
+    {
+        agent.velocity = Vector3.left * 15;
+        enemyrb.isKinematic = false;
+        enemyrb.useGravity = true;
+        
     }
 }

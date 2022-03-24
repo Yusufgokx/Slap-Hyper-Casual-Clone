@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Scripts")]
     public ChracterControl chracterControl;
-    
+    public EnemyControl enemyControl;
     
     void Awake()
     {

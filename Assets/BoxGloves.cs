@@ -7,7 +7,20 @@ public class BoxGloves : MonoBehaviour
 {
     public float totalDuration;
     public float animationDelay;
+    Rigidbody EnemyRb;
+    ChracterControl script2;
 
+
+    private void Start()
+    {
+     
+        
+    }
+
+    private void Update()
+    {
+        
+    }
     public void BoxGloveAnimation()
     {
         transform.DOMoveX(3, totalDuration/2).SetDelay(animationDelay).OnComplete(() =>
@@ -17,5 +30,17 @@ public class BoxGloves : MonoBehaviour
                 //Move();
              });
          });
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("enemy"))
+        {
+            other.gameObject.GetComponent<EnemyControl>().DestrucFirst();
+           // GameManager.Instance.enemyControl.DestrucFirst();
+
+
+        }
     }
 }
