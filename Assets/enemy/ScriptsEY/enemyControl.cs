@@ -12,6 +12,7 @@ public class EnemyControl : MonoBehaviour
     public Rigidbody enemyrb;
     public float destrucStrengthMultiplier = 3f;
     
+    
     void Start()
     {
         enemyrb = GetComponent<Rigidbody>();
@@ -19,7 +20,10 @@ public class EnemyControl : MonoBehaviour
         player = GameManager.Instance.chracterControl.transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        //mainCamera = GetComponent<Transform>();
+        
+
+        
+        
 
     }
 
@@ -65,7 +69,7 @@ public class EnemyControl : MonoBehaviour
         {
 
             anim.SetBool("attack", false);
-
+        
 
         }
         if (collision.gameObject.CompareTag("Player"))
@@ -86,4 +90,6 @@ public class EnemyControl : MonoBehaviour
         enemyrb.useGravity = true;
         
     }
+
+
 }

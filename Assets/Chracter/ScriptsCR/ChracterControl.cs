@@ -15,13 +15,13 @@ public class ChracterControl : MonoBehaviour
     public int guc;
     public float hiz;
     public Camera mainCamera;
-
+    public Camera2 cameraTwo;
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
         Healt = 100;
         hasarText.text =Healt.ToString();// "HASAR"+  = işaretninden sonra soldaki hasar kodunu yazarsak sayı 'HARARDEĞER'ŞEKLİNDE YAZAR ;
- 
+       
 
     }
 
@@ -63,7 +63,8 @@ public class ChracterControl : MonoBehaviour
         {
 
             animKing.SetBool("kingGirdi", false);
-
+            //mainCamera.gameObject.SetActive(false);
+           // cameraTwo.gameObject.SetActive(true);
 
         }
 
