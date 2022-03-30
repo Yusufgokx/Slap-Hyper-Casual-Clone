@@ -16,22 +16,33 @@ public class ChracterControl : MonoBehaviour
     public float hiz;
     public Camera mainCamera;
     public Camera2 cameraTwo;
+    public bool kossunMU;
+
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
         Healt = 100;
         hasarText.text =Healt.ToString();// "HASAR"+  = işaretninden sonra soldaki hasar kodunu yazarsak sayı 'HARARDEĞER'ŞEKLİNDE YAZAR ;
-       
+        kossunMU = true;
 
     }
 
     public void Update()
     {
-        animKing.SetBool("Run", true);
-        float yatay = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector3(yatay*hiz, 0, 10);
        
+        if (kossunMU == true)
+        {
+            animKing.SetBool("Run", true);
+            float yatay = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector3(yatay * hiz, 0, 10);
+        }
+        else
+        {
+            animKing.SetBool("Run", false);
+            float yatay = 0;
+            rb.velocity = new Vector3(yatay * hiz, 0, 0);
 
+        }
 
     }
 

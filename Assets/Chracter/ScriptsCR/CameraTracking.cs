@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,16 @@ public class CameraTracking : MonoBehaviour
   
     void Update()
     {
-        this.transform.position = theDifference + objectTracking.transform.position;
+        if (isTarget==true)
+        {
+            transform.position = theDifference + objectTracking.transform.position;
+        }
+    }
+    private bool isTarget=true;
+
+    public void FinishAnimation(Vector3 finishTargetPosition,float animationDuration)
+    {
+        isTarget = false;
+        transform.DOMove(finishTargetPosition, animationDuration);
     }
 }

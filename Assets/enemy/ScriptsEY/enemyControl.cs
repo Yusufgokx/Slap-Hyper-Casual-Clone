@@ -11,8 +11,8 @@ public class EnemyControl : MonoBehaviour
     public Animator anim;
     public Rigidbody enemyrb;
     public float destrucStrengthMultiplier = 3f;
-    
-    
+ 
+
     void Start()
     {
         enemyrb = GetComponent<Rigidbody>();
@@ -20,76 +20,57 @@ public class EnemyControl : MonoBehaviour
         player = GameManager.Instance.chracterControl.transform;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        
-
-        
-        
-
+     
+      
     }
-
-    public void Update()
+    
+    private void Update()
     {
-        if (playerCollision == true && Vector3.Distance(this.gameObject.transform.position, player.position) > 2)
+        if (playerCollision)
         {
-            agent.SetDestination(player.position);
-            anim.SetBool("enemyRun", true);
+            if (playerCollision == true && Vector3.Distance(this.gameObject.transform.position, player.position) > 2)
+            {
+                if (this.gameObject.GetComponent<NavMeshAgent>().enabled == true)
+                {
+                    agent.SetDestination(player.position);
+                    anim.CrossFade("enemyRun", 0.1f);
+                }
+            }
+            transform.LookAt(player.transform);
         }
-        else
-        {
-            anim.SetBool("enemyRun", false);
-        }
-       
-        //  Debug.Log(Vector3.Distance(this.gameObject.transform.position, player.position));
+        
     }
 
-    public void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player") && playerCollision == false)
         {
-
-            anim.SetBool("attack", true);
-
-            playerCollision = true;
-
+            StartCoroutine(nameof(PlayerTrigger));
+            GameManager.Instance.TargetText();
         }
-        if (collision.gameObject.CompareTag("Player"))
-        {
-
-            anim.SetBool("enemyRun", true);
-
-            playerCollision = true;
-
-        }
-
-
     }
-    public void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
 
-            anim.SetBool("attack", false);
-        
-
-        }
-        if (collision.gameObject.CompareTag("Player"))
-        {
-
-            anim.SetBool("enemyRun", true);
-
-            playerCollision = true;
-
-        }
-
-
-    }
+   
     public void DestrucFirst()
     {
-        agent.velocity = Vector3.left * 15;
+        this.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        enemyrb.velocity = Vector3.left * 15;
         enemyrb.isKinematic = false;
         enemyrb.useGravity = true;
-        
+        Destroy(this.gameObject, 5);
+   
+    }
+   
+
+
+
+   public IEnumerator PlayerTrigger()
+    {
+        anim.CrossFade("SlapDamage", 0.1f);
+        yield return new WaitForSeconds(3.3f);
+        playerCollision = true;
     }
 
-
 }
+
+

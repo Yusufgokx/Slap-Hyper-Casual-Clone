@@ -26,17 +26,10 @@ public class ObstacleScript : MonoBehaviour
         
     }
 
- 
-    void Update()
-    {
-       
-      // transform.Rotate(Vector3.forward*(sawRotationSpeed*Time.deltaTime));
-    }
+
     public void ObstacleMove()
     {
-       
-        //transform.DOMove(Hedef.position, zaman).OnComplete(() => geriGel());
-        //transform.DOMove(new Vector3 (transform.position.x+5,transform.position.y,transform.position.z), zaman).OnComplete(() => transform.DOMove( new Vector3(transform.position.x-5,transform.position.y,transform.position.z) , 1).OnComplete(() => ObstacleMove())); //5birim sağa 5 birim sola haraket ettirir 1saniyede 
+
         transform.DOMoveX(andPosX, zaman / 2).SetDelay(durationDelay/2).OnComplete(() =>
            {
                transform.DOMoveX(startPosX, zaman / 2).SetDelay(durationDelay / 2).OnComplete(() =>
@@ -46,9 +39,6 @@ public class ObstacleScript : MonoBehaviour
                
            });
     }
-  /*public void geriGel()
-    {
-        transform.DOMoveX(-7, 5);
-    }*/
+ 
 }
 

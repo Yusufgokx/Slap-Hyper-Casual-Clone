@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,24 +9,30 @@ public class GameManager : MonoBehaviour
 
     [Header("Scripts")]
     public ChracterControl chracterControl;
-    public EnemyControl enemyControl;
-    
+    public CameraTracking CameraTracking;
+    public TextMeshProUGUI enemyPoints;
+    private int enemyCount = 0;
     void Awake()
     {
         Instance = this;
+        enemyPoints.text = enemyCount.ToString();
 
     }
 
     void Start()
     {
-       
-    }
 
-    
+    }
+   
+
     void Update()
     {
-        
-    }
-  
 
+    }
+
+    public void TargetText()
+    {
+        enemyCount++;
+        enemyPoints.text = enemyCount.ToString();
+    }
 }
