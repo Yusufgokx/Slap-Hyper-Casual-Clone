@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyControl : MonoBehaviour
 {
-    public bool playerCollision = false;
+    public bool playerCollision;
     public Transform player;
     private NavMeshAgent agent;
     public Animator anim;
@@ -28,7 +28,7 @@ public class EnemyControl : MonoBehaviour
     {
         if (playerCollision)
         {
-            if (playerCollision == true && Vector3.Distance(this.gameObject.transform.position, player.position) > 2)
+            if (playerCollision == true && Vector3.Distance(this.gameObject.transform.position, player.position) > 2.5)
             {
                 if (this.gameObject.GetComponent<NavMeshAgent>().enabled == true)
                 {
@@ -36,7 +36,7 @@ public class EnemyControl : MonoBehaviour
                     anim.CrossFade("enemyRun", 0.1f);
                 }
             }
-            transform.LookAt(player.transform);
+         //transform.LookAt(player.transform);
         }
         
     }
@@ -67,7 +67,7 @@ public class EnemyControl : MonoBehaviour
    public IEnumerator PlayerTrigger()
     {
         anim.CrossFade("SlapDamage", 0.1f);
-        yield return new WaitForSeconds(3.3f);
+        yield return new WaitForSeconds(2.3f);
         playerCollision = true;
     }
 

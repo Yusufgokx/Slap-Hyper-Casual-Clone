@@ -13,5 +13,8 @@ public class ZeminSpawnlama : MonoBehaviour
          {
              Instantiate(gameObject, spawnPosition.position, transform.rotation, null);
          }
+
+
+
      }
 }

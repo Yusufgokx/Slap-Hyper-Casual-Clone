@@ -8,7 +8,7 @@ public class ChracterControl : MonoBehaviour
     //[SerializeField] float hareketHizi;
    // [SerializeField] float hiz;
     
-    Rigidbody rb;
+    public Rigidbody rb;
     public Animator animKing;
     public float Healt;
     public TextMeshProUGUI hasarText;
@@ -16,21 +16,21 @@ public class ChracterControl : MonoBehaviour
     public float hiz;
     public Camera mainCamera;
     public Camera2 cameraTwo;
-    public bool kossunMU;
+    public bool chracterRun;
 
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
         Healt = 100;
-        hasarText.text =Healt.ToString();// "HASAR"+  = işaretninden sonra soldaki hasar kodunu yazarsak sayı 'HARARDEĞER'ŞEKLİNDE YAZAR ;
-        kossunMU = true;
+        hasarText.text =Healt.ToString();// "HASAR"+  = işaretninden sonra soldaki hasar kodunu yazarsak sayı 'HASARDEĞER'ŞEKLİNDE YAZAR ;
+        chracterRun = true;
 
     }
 
     public void Update()
     {
        
-        if (kossunMU == true)
+        if (chracterRun == true)
         {
             animKing.SetBool("Run", true);
             float yatay = Input.GetAxis("Horizontal");
@@ -54,7 +54,8 @@ public class ChracterControl : MonoBehaviour
         {
 
             animKing.SetBool("kingGirdi", true);
-            HasarAl();
+            animKing.CrossFade("SlapKing", 0.1f);
+            randomDamage();
 
 
         }
@@ -62,7 +63,7 @@ public class ChracterControl : MonoBehaviour
         {
 
             Debug.Log("HasarAldı");
-            HasarAl();
+            randomDamage();
         }
 
     }
@@ -82,7 +83,7 @@ public class ChracterControl : MonoBehaviour
 
     }
 
-    public void HasarAl()
+    public void randomDamage()
     {
         Healt -= Random.Range(5, 15);
         hasarText.text =Healt.ToString();

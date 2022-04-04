@@ -11,16 +11,12 @@ public class GameManager : MonoBehaviour
     public ChracterControl chracterControl;
     public CameraTracking CameraTracking;
     public TextMeshProUGUI enemyPoints;
+
     private int enemyCount = 0;
     void Awake()
     {
         Instance = this;
         enemyPoints.text = enemyCount.ToString();
-
-    }
-
-    void Start()
-    {
 
     }
    

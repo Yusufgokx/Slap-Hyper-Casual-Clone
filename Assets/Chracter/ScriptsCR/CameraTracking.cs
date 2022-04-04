@@ -7,12 +7,13 @@ public class CameraTracking : MonoBehaviour
 {
     public GameObject objectTracking;
     Vector3 theDifference;
+    private bool isTarget = true;
+
     void Start()
     {
         theDifference = this.transform.position - objectTracking.transform.position;
     }
 
-  
     void Update()
     {
         if (isTarget==true)
@@ -20,7 +21,9 @@ public class CameraTracking : MonoBehaviour
             transform.position = theDifference + objectTracking.transform.position;
         }
     }
-    private bool isTarget=true;
+  
+
+
 
     public void FinishAnimation(Vector3 finishTargetPosition,float animationDuration)
     {

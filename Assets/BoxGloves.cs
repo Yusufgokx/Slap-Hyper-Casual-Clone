@@ -11,16 +11,6 @@ public class BoxGloves : MonoBehaviour
     ChracterControl script2;
 
 
-    private void Start()
-    {
-     
-        
-    }
-
-    private void Update()
-    {
-        
-    }
     public void BoxGloveAnimation()
     {
         transform.DOMoveX(3, totalDuration/2).SetDelay(animationDelay).OnComplete(() =>
